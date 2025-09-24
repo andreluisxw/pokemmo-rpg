@@ -37,23 +37,77 @@
     background-size: 100% 100%;
 }
 
-/* --- Posicionamento dos Personagens --- */
+/* --- Posicionamento dos Personagens e Bases de Grama (SPRITES) --- */
+
 .imagemVilao {
     position: absolute;
-    top: 28%;       /* Ajuste a altura do oponente */
-    right: 15%;     /* Ajuste a distância da direita */
-    width: 180px;   /* Largura do contêiner */
-    height: 180px;  /* Altura do contêiner */
+    top: 15%;        
+    right: 15%;     /* Ajustado para mover ligeiramente o contêiner do vilão */
+    width: 250px;    
+    height: 180px;   
     display: flex;
-    justify-content: center;
-    align-items: flex-end;
+    justify-content: center; 
+    align-items: flex-end;  
+    z-index: 1; 
 }
 
+/* Base de Grama do Vilão (usando a imagem) */
+.imagemVilao::before {
+    content: '';
+    position: absolute;
+    width: 240px;    
+    height: 70px;    
+    background-image: url('/forest_battle.png'); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    bottom: 0px;    
+    transform: scale(2.0); 
+    transform-origin: center bottom;
+    z-index: -1; 
+}
 
 .imagemHeroi {
     position: absolute;
-    bottom: 5%;
-    left: 5%;
+    bottom: 5%;     
+    left: 8%;       /* AJUSTADO: Movendo o contêiner do herói um pouco mais para a esquerda */
+    width: 400px;   /* AJUSTADO: Aumentando a largura para dar mais espaço para centralizar */
+    height: 250px;  
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente o Pokémon dentro do contêiner */
+    align-items: flex-end;   
+    z-index: 1; 
+}
+
+/* Base de Grama do Herói (usando a imagem) */
+.imagemHeroi::before {
+    content: '';
+    position: absolute;
+    width: 320px;    
+    height: 90px;    
+    background-image: url('/forest_battle.png'); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    bottom: 0px;    
+    transform: scale(2.0); 
+    transform-origin: center bottom;
+    z-index: -1; 
+}
+
+/* Garante que o Pokémon (a imagem) fique na frente da grama */
+.imagemVilao > div, .imagemHeroi > div {
+    position: relative;
+    z-index: 2; 
+    filter: drop-shadow(2px 2px 1px rgba(0,0,0,0.3));
+}
+
+/* AJUSTE FINO VERTICAL PARA O VILÃO */
+.imagemVilao > div {
+    margin-bottom: 25px; /* Aumentado de 20px para 25px para subir um pouco mais */
+}
+
+/* AJUSTE FINO VERTICAL PARA O HERÓI */
+.imagemHeroi > div {
+    margin-bottom: 35px; /* Aumentado de 30px para 35px para subir um pouco mais */
 }
 
 /* Estiliza a imagem dentro dos componentes Image do Next.js */
